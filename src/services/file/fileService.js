@@ -40,8 +40,30 @@ async function ListFiles(){
 
 }
 
+async function RetrieverFile(fileId){
+    try{
+        const response = await openai.retrieveFile(fileId);
+        return response;
+    }catch(e){
+        return "fileId not found";
+    }
+}
+
+async function DeleteFile(fileId){
+    try{
+        const response = await openai.deleteFile(fileId);
+        return response;
+    }catch(e){
+        return "fileId not found";
+    }
+}
+
+
+
 module.exports = {
     TransformData,
     UploadFile,
-    ListFiles
+    ListFiles,
+    RetrieverFile,
+    DeleteFile
 }
