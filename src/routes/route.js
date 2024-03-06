@@ -6,6 +6,6 @@ router
 .post("/test", apiController.Test)
 .post("/transform-data", apiController.TransformData)
 .post("/upload-file", apiController.UploadFile)
-
+.get("/list-files", apiController.ListFiles)
 
 module.exports = router;
