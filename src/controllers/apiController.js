@@ -53,14 +53,48 @@ async function CreateFineTune (req, res){
     res.status(response.status).send(response.data);
 }
 
+async function ListFineTune (req, res){    
+    const response = await fineTuneService.ListFineTune();
+    res.status(response.status).send(response.data);
+}
+
+async function RetrieveFineTune (req, res){    
+    var fineTuneId = req.query["fineTuneId"];
+    const response = await fineTuneService.RetrieveFineTune(fineTuneId);
+    res.status(response.status).send(response.data);
+}
+
+async function CancelFineTune (req, res){    
+    var fineTuneId = req.query["fineTuneId"];
+    const response = await fineTuneService.CancelFineTune(fineTuneId);
+    res.status(response.status).send(response.data);
+}
+
+async function DeleteModelFineTune (req, res){    
+    var model = req.query["model"];
+    const response = await fineTuneService.DeleteModelFineTune(model);
+    res.status(response.status).send(response.data);
+}
+
 //#endregion
+
+async function GetMessage (req, res){
+    var message = req.query["message"];
+    const response = await openaiService.GetMessage(message);
+    res.send(response);
+}
 
 module.exports = {
     Test,
     TransformData,
     UploadFile,
     ListFiles,
-    RetrieverFile,
+    RetrieveFile,
     DeleteFile,
-    CreateFineTune
+    CreateFineTune, 
+    ListFineTune,
+    RetrieveFineTune,
+    CancelFineTune,
+    DeleteModelFineTune,
+    GetMessage
 }
