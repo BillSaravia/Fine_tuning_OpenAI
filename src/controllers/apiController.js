@@ -1,14 +1,19 @@
 const fileService = require("../services/file/fileService");
+const fineTuneService = require("../services/file/fineTuneServices")
 
 async function Test (req, res){
     res.send("test ok");
 }
 
+//#region Transformación
 
 async function TransformData (req, res){
     await fileService.TransformData();
     res.send();
 }
+//#endregion
+
+//#region File
 
 async function UploadFile (req, res){
     const response = await fileService.UploadFile();
@@ -38,7 +43,17 @@ async function DeleteFile (req, res){
     res.status(response.status).send(response.data);
 }
 
+//#endregion
 
+
+//#region FineTune
+async function CreateFineTune (req, res){
+    var fileId = req.query["fileId"];
+    const response = await fineTuneService.CreateFineTune(fileId);
+    res.status(response.status).send(response.data);
+}
+
+//#endregion
 
 module.exports = {
     Test,
@@ -46,5 +61,6 @@ module.exports = {
     UploadFile,
     ListFiles,
     RetrieverFile,
-    DeleteFile
+    DeleteFile,
+    CreateFineTune
 }
