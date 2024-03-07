@@ -1,14 +1,19 @@
 const fileService = require("../services/file/fileService");
+const fineTuneService = require("../services/file/fineTuneServices")
 
 async function Test (req, res){
     res.send("test ok");
 }
 
+//#region Transformación
 
 async function TransformData (req, res){
     await fileService.TransformData();
     res.send();
 }
+//#endregion
+
+//#region File
 
 async function UploadFile (req, res){
     const response = await fileService.UploadFile();
@@ -38,7 +43,46 @@ async function DeleteFile (req, res){
     res.status(response.status).send(response.data);
 }
 
+//#endregion
 
+
+//#region FineTune
+async function CreateFineTune (req, res){
+    var fileId = req.query["fileId"];
+    const response = await fineTuneService.CreateFineTune(fileId);
+    res.status(response.status).send(response.data);
+}
+
+async function ListFineTune (req, res){    
+    const response = await fineTuneService.ListFineTune();
+    res.status(response.status).send(response.data);
+}
+
+async function RetrieveFineTune (req, res){    
+    var fineTuneId = req.query["fineTuneId"];
+    const response = await fineTuneService.RetrieveFineTune(fineTuneId);
+    res.status(response.status).send(response.data);
+}
+
+async function CancelFineTune (req, res){    
+    var fineTuneId = req.query["fineTuneId"];
+    const response = await fineTuneService.CancelFineTune(fineTuneId);
+    res.status(response.status).send(response.data);
+}
+
+async function DeleteModelFineTune (req, res){    
+    var model = req.query["model"];
+    const response = await fineTuneService.DeleteModelFineTune(model);
+    res.status(response.status).send(response.data);
+}
+
+//#endregion
+
+async function GetMessage (req, res){
+    var message = req.query["message"];
+    const response = await openaiService.GetMessage(message);
+    res.send(response);
+}
 
 module.exports = {
     Test,
@@ -46,5 +90,11 @@ module.exports = {
     UploadFile,
     ListFiles,
     RetrieverFile,
-    DeleteFile
+    DeleteFile,
+    CreateFineTune, 
+    ListFineTune,
+    RetrieveFineTune,
+    CancelFineTune,
+    DeleteModelFineTune,
+    GetMessage
 }

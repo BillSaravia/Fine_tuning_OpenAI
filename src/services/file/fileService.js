@@ -42,7 +42,7 @@ async function ListFiles(){
 
 async function RetrieverFile(fileId){
     try{
-        const response = await openai.retrieveFile(fileId);
+        const response = await openai.RetrieverFile(fileId);
         return response;
     }catch(e){
         return "fileId not found";
