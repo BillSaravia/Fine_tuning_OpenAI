@@ -89,7 +89,7 @@ module.exports = {
     TransformData,
     UploadFile,
     ListFiles,
-    RetrieveFile,
+    RetrieverFile,
     DeleteFile,
     CreateFineTune, 
     ListFineTune,
